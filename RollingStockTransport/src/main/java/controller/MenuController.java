@@ -6,9 +6,9 @@ import static view.Multilingual.rs;
 import model.train.RailwayStation;
 import model.train.SuchTrainNotExist;
 import model.train.Trains;
+import model.train.Tuple;
 import model.train.entity.PassengerWaggon;
 import model.train.entity.Train;
-import view.Multilingual;
 import view.View;
 import java.util.Scanner;
 
@@ -16,11 +16,10 @@ public class MenuController {
     private final RailwayStation railway;
     private final View view;
     private final Scanner scanner;
-    private Multilingual mult;
     private UserData userData;
 
-    public MenuController(RailwayStation railway, View view,
-                          Scanner scanner) {
+    MenuController(RailwayStation railway, View view,
+                   Scanner scanner) {
         this.railway = railway;
         this.view = view;
         this.scanner = scanner;
@@ -46,13 +45,11 @@ public class MenuController {
                 case CMD_SORT:
                     sort();
                     break;
-                case CMD_COUNT_PASSENGER:
-                    countPassenger();
-                    break;
-                case CMD_COUNT_BAG:
-                    ///Trains.countBaggage();
+                case CMD_COUNT:
+                    count();
                     break;
                 case COUNT_IN_RANGE:
+                    inRange(input);
                     break;
                 case CMD_QUIT:
                     return;
@@ -67,11 +64,12 @@ public class MenuController {
         view.println(rs().getString("selected"));
     }
 
-    private void countPassenger() {
+    private void count() {
         Train t;
         if ((t = userData.getCurrentTrain()) != null) {
-            int q = Trains.countPassengers(t);
-            view.println(rs().getString("quantity_passengers") + q);
+            Tuple<Integer, Integer> result = Trains.countPassengers(t);
+            view.println(rs().getString("quantity_passengers") + result.getX());
+            view.println(rs().getString("quantity_baggages") + result.getY());
         } else {
             view.println(rs().getString("not_selected"));
         }
@@ -110,7 +108,14 @@ public class MenuController {
     private void inRange(String cmd) {
         cmd = cmd.substring(16, cmd.length()-1);
         String args[] = cmd.split(",");
-        //Trains.diapason();
+        Train t;
+        if ((t = userData.getCurrentTrain()) != null) {
+            int left = Integer.parseInt(args[0]);
+            int right = Integer.parseInt(args[1]);
+            Trains.diapason(t, left, right);
+        } else {
+            view.println(rs().getString("not_selected"));
+        }
     }
 
     private void show() {

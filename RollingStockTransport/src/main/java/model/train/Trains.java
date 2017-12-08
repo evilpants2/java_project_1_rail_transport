@@ -15,18 +15,25 @@ public final class Trains {
         train.getWaggons().sort(comp);
     }
 
-    //counts passenger
-    public static int countPassengers(Train train) {
-        int numberOfPassengers = 0;
+    //counts passenger & baggage
+    public static Tuple<Integer, Integer> countPassengers(Train train) {
+        Integer numberOfPassengers = 0;
+        Integer weight = 0;
         PassengerWaggon pw;
+        List<Passenger> passengers;
         for (RailTransport rt : train.getWaggons()) {
             if((pw = PassengerWaggon.isPassenger(rt)) != null) {
-                numberOfPassengers += pw.getCountPassengers();
+                numberOfPassengers += pw.getPassengers().size();
+                passengers = pw.getPassengers();
+                for (Passenger p : passengers) {
+                    weight += p.getBaggageWeight();
+                }
             }
         }
-        return numberOfPassengers;
+        return new Tuple<>(numberOfPassengers, weight);
     }
-    //counts them baggage
+
+    @Deprecated
     public static int countBaggage(Train train) {
         int weight = 0;
         PassengerWaggon pw;

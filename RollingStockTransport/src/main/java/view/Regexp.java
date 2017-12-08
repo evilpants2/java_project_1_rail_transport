@@ -12,4 +12,5 @@ public interface Regexp {
     String CMD_SELECT = "-select (\\d{1,3})";
     String CMD_SELECTED = "-show selected";
     String CMD_SHOW_TRAIN = "-show train (\\d{1,3})";
+    String CMD_COUNT = "-count";
 }

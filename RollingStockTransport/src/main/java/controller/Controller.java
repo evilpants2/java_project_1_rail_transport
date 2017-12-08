@@ -30,15 +30,16 @@ public class Controller {
         sc = new Scanner(System.in);
         final MenuController menu = new MenuController(railway, view, sc);
         selectLanguage();
+        menu.execute();
 
-        Train train = railway.getTrain(0);
-        // tasks
-        Trains.sort(train, PassengerWaggon.comfortComparator());
-        view.printCollection(train.getWaggons());
-        view.println("================================================");
-        view.println("Number of passengers: " + Trains.countPassengers(train));
-        view.println("================================================");
-        view.printCollection(Trains.diapason(train, 3, 5));
+//        Train train = railway.getTrain(0);
+//        // tasks
+//        Trains.sort(train, PassengerWaggon.comfortComparator());
+//        view.printCollection(train.getWaggons());
+//        view.println("================================================");
+//        view.println("Number of passengers: " + Trains.countPassengers(train));
+//        view.println("================================================");
+//        view.printCollection(Trains.diapason(train, 3, 5));
 
 
     }
