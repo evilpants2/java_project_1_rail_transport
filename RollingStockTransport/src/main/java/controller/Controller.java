@@ -4,7 +4,6 @@ import static view.Multilingual.rs;
 
 import model.train.RailwayStation;
 import view.Multilingual;
-import view.Regexp;
 import view.View;
 import view.ViewText;
 

@@ -1,6 +1,6 @@
 package controller;
 
-import static view.Regexp.*;
+import static view.CommandsRegexp.*;
 import static view.Multilingual.rs;
 
 import model.train.RailwayStation;
@@ -8,9 +8,8 @@ import model.train.SuchTrainNotExist;
 import model.train.Trains;
 import model.train.Tuple;
 import model.train.entity.PassengerWaggon;
-import model.train.entity.RailTransport;
 import model.train.entity.Train;
-import view.Regexp;
+import view.CommandsRegexp;
 import view.View;
 import view.ViewText;
 
@@ -52,11 +51,11 @@ class MenuController {
                 case CMD_QUIT:
                     return;
                 default:
-                    if (input.matches(Regexp.SELECT_REGEX)) {
+                    if (input.matches(CommandsRegexp.SELECT_REGEX)) {
                         select(input);
-                    } else if (input.matches(Regexp.SHOW_TRAIN_REGEX)) {
+                    } else if (input.matches(CommandsRegexp.SHOW_TRAIN_REGEX)) {
                         showSelected(input);
-                    } else if (input.matches(Regexp.COUNT_IN_RANGE_REGEX)) {
+                    } else if (input.matches(CommandsRegexp.COUNT_IN_RANGE_REGEX)) {
                         inRange(input);
                     } else {
                         view.printerr(rs().getString("incorrect"));
@@ -106,8 +105,8 @@ class MenuController {
         Train t;
         if ((t = userData.getCurrentTrain()) != null) {
             view.println(t.toString());
-            for (RailTransport rt : t.getWaggons()) {
-                view.println(rt.toString());
+            for (int i = 0; i < t.getWaggons().size(); i++) {
+                view.println("№" + i + t.getWaggons().get(i));
             }
         } else {
             view.println(rs().getString("not_selected"));

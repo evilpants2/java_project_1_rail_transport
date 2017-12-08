@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 class ProjectData implements java.io.Serializable {
 
@@ -37,7 +38,7 @@ class ProjectData implements java.io.Serializable {
         List<Passenger> passengers = projectData.passengers;
         for (Passenger p : passengers) {
             int id = p.getTicket().getTrainID();
-            if (id == 1) {
+            if (id == 0) {
                 railway.takeTrain(p, 0);
             } else {
                 railway.takeTrain(p, 1);
@@ -133,31 +134,42 @@ class ProjectData implements java.io.Serializable {
         // train 1
         head = getLocomotive(1,140, Engine.ELECTRIC_MOTOR);
         tail = getLocomotive(2, 120, Engine.DIESEL);
-        for (int i = 0; i < 8; i++) {
-            waggons.add(getWaggonEconomy());
-        }
-        for (int i = 0; i < 6; i++) {
-            waggons.add(getWaggonCoupe());
-        }
-        for (int i = 0; i < 4; i++) {
-            waggons.add(getWaggonLuxe());
-        }
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
         waggons.add(getWaggonVip());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonCoupe());
         Train train1 = new Train(head, tail, waggons);
         trains.add(train1);
 
         //train 2
         waggons = new ArrayList<>();
         head = getLocomotive(1,160, Engine.PETROL);
-        for (int i = 0; i < 5; i++) {
-            waggons.add(getWaggonEconomy());
-        }
-        for (int i = 0; i < 10; i++) {
-            waggons.add(getWaggonCoupe());
-        }
-        for (int i = 0; i < 2; i++) {
-            waggons.add(getWaggonLuxe());
-        }
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
+        waggons.add(getWaggonEconomy());
+        waggons.add(getWaggonLuxe());
+        waggons.add(getWaggonCoupe());
         Train train2 = new Train(head, waggons);
         trains.add(train2);
     }
