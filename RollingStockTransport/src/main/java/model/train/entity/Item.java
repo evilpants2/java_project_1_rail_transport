@@ -1,6 +1,10 @@
 package model.train.entity;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
+    private static final long serialVersionUID = -3056760678953206590L;
+
     private final String itemName;
     private final int weight;
 

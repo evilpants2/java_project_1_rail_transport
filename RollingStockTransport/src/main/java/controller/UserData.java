@@ -21,7 +21,7 @@ public class UserData {
     private Train current;
 
     public void setCurrentTrain(Train train) {
-        this.current = current;
+        this.current = train;
     }
 
     public Train getCurrentTrain() {

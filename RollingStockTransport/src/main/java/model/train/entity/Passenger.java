@@ -1,10 +1,13 @@
 package model.train.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Passenger {
-    private static int counter;
+public class Passenger implements java.io.Serializable {
+    private static final long serialVersionUID = -3056760678953206590L;
+
+    private transient static int counter;
 
     private final String name;
     private final int passengerID = ++counter;
@@ -20,8 +23,8 @@ public class Passenger {
         return items.get(index);
     }
 
-    public void add(int index, Item element) {
-        items.add(index, element);
+    public void add(Item element) {
+        items.add(element);
     }
 
     public Item remove(int index) {

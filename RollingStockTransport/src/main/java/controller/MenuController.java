@@ -8,11 +8,15 @@ import model.train.SuchTrainNotExist;
 import model.train.Trains;
 import model.train.Tuple;
 import model.train.entity.PassengerWaggon;
+import model.train.entity.RailTransport;
 import model.train.entity.Train;
+import view.Regexp;
 import view.View;
+import view.ViewText;
+
 import java.util.Scanner;
 
-public class MenuController {
+class MenuController {
     private final RailwayStation railway;
     private final View view;
     private final Scanner scanner;
@@ -26,18 +30,15 @@ public class MenuController {
         this.userData = UserData.getInstances();
     }
 
-    public void execute() {
+    void execute() {
         while (true) {
             String input = scanner.nextLine();
             switch (input) {
+                case CMD_HELP:
+                    showHelp();
+                    break;
                 case CMD_SHOW:
                     show();
-                    break;
-                case CMD_SHOW_TRAIN:
-                    showSelected(input);
-                    break;
-                case CMD_SELECT:
-                    select(input);
                     break;
                 case CMD_SELECTED:
                     showSelected();
@@ -48,18 +49,34 @@ public class MenuController {
                 case CMD_COUNT:
                     count();
                     break;
-                case COUNT_IN_RANGE:
-                    inRange(input);
-                    break;
                 case CMD_QUIT:
                     return;
+                default:
+                    if (input.matches(Regexp.SELECT_REGEX)) {
+                        select(input);
+                    } else if (input.matches(Regexp.SHOW_TRAIN_REGEX)) {
+                        showSelected(input);
+                    } else if (input.matches(Regexp.COUNT_IN_RANGE_REGEX)) {
+                        inRange(input);
+                    } else {
+                        view.printerr(rs().getString("incorrect"));
+                    }
             }
         }
     }
 
+    private void showHelp() {
+        view.println(rs().getString("commands"));
+    }
+
     private void select(String i) {
         int index = Integer.parseInt((i.split("\\s"))[1]);
-        checkIndex(index);
+        try {
+            checkIndex(index);
+        } catch (SuchTrainNotExist e){
+            view.printerr(e.getMessage() + " " + e.getIndex());
+            return;
+        }
         userData.setCurrentTrain(railway.getTrain(index));
         view.println(rs().getString("selected"));
     }
@@ -79,6 +96,7 @@ public class MenuController {
         Train t;
         if ((t = userData.getCurrentTrain()) != null) {
             Trains.sort(t, PassengerWaggon.comfortComparator());
+            view.println(rs().getString("sort"));
         } else {
             view.println(rs().getString("not_selected"));
         }
@@ -88,6 +106,9 @@ public class MenuController {
         Train t;
         if ((t = userData.getCurrentTrain()) != null) {
             view.println(t.toString());
+            for (RailTransport rt : t.getWaggons()) {
+                view.println(rt.toString());
+            }
         } else {
             view.println(rs().getString("not_selected"));
         }
@@ -95,7 +116,12 @@ public class MenuController {
 
     private void showSelected(String i) {
         int index = Integer.parseInt((i.split("\\s"))[2]);
-        checkIndex(index);
+        try {
+            checkIndex(index);
+        } catch (SuchTrainNotExist e){
+            view.printerr(e.getMessage() + " " + e.getIndex());
+            return;
+        }
         view.println(railway.getTrain(index).toString());
     }
 
@@ -112,7 +138,7 @@ public class MenuController {
         if ((t = userData.getCurrentTrain()) != null) {
             int left = Integer.parseInt(args[0]);
             int right = Integer.parseInt(args[1]);
-            Trains.diapason(t, left, right);
+            view.printCollection(Trains.diapason(t, left, right));
         } else {
             view.println(rs().getString("not_selected"));
         }
@@ -120,8 +146,9 @@ public class MenuController {
 
     private void show() {
         for (int i = 0; i < railway.numberOfTrains(); i++) {
-            view.print(rs().getString("track ") + i + ": ");
-            view.print(railway.getTrain(i).toString());
+            view.println(rs().getString("track") + i + ": ");
+            view.println(railway.getTrain(i).toString());
+            view.println(ViewText.TRAIN_SEPARATOR);
         }
     }
 }

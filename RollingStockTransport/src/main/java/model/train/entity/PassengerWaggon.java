@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PassengerWaggon extends RailTransport
         implements java.io.Serializable, Cloneable {
+    private static final long serialVersionUID = -3056760678953206590L;
     private int numberOfSeats;
     private ComfortLevel comfort;
     private List<Passenger> passengers;
@@ -22,14 +23,6 @@ public class PassengerWaggon extends RailTransport
         passengers = new ArrayList<>();
         this.numberOfSeats = numberOfSeats;
         this.comfort = comfort;
-    }
-
-    public int getNumberOfSeats() {
-        return numberOfSeats;
-    }
-
-    public ComfortLevel getComfort() {
-        return comfort;
     }
 
     public int getCountPassengers() {
@@ -79,17 +72,8 @@ public class PassengerWaggon extends RailTransport
         }
     }
 
-    // ???, create clone
-    @Override
-    protected PassengerWaggon clone() throws CloneNotSupportedException {
-        return (PassengerWaggon) super.clone();
-    }
-
     @Override
     public String toString() {
-        return super.toString() + "\n PassengerWaggon{" +
-                "\n numberOfSeats=" + numberOfSeats +
-                "\n comfort=" + comfort +
-                '}';
+        return getIdentifierName();
     }
 }

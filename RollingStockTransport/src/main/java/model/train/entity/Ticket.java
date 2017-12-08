@@ -1,8 +1,11 @@
 package model.train.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Ticket {
+public class Ticket implements java.io.Serializable {
+    private static final long serialVersionUID = -3056760678953206590L;
+
     private final String from;
     private final String to;
     private final LocalDateTime dateArrive;

@@ -12,6 +12,10 @@ public final class RailwayStation {
         trains = new ArrayList<>();
     }
 
+    public void setTrains(List<Train> trains) {
+        this.trains = trains;
+    }
+
     public boolean addTrain(Train train) {
         return trains.add(train);
     }
@@ -39,12 +43,7 @@ public final class RailwayStation {
             // success
             RailTransport rt = pt.getWaggons().get(ticket.getWaggonNumber());
             PassengerWaggon pw = (PassengerWaggon) rt;
-//            if (pw.getIdentifierName().equals(ticket.getWaggon())) {
-//                pw.addPassenger(passenger);
-//            }
             pw.addPassenger(passenger);
-        }
-        //passengerTrain.getWaggons().get(ticket)
-    }
+        } }
 
 }

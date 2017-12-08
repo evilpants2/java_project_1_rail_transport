@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 public class Locomotive extends RailTransport
         implements Traction, java.io.Serializable, Cloneable{
+    private static final long serialVersionUID = -3056760678953206590L;
+
     private final int speed;
     private final Engine engine;
 

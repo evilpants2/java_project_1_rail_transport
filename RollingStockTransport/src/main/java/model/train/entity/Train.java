@@ -3,10 +3,13 @@ package model.train.entity;
 import model.train.NotTractionException;
 import model.train.Traction;
 
+import java.io.Serializable;
 import java.util.List;
 
-public final class Train {
-    private static int quantity;
+public final class Train implements java.io.Serializable {
+    private static final long serialVersionUID = 8L;
+
+    private transient static int quantity;
     private final int idTrain = quantity++;
 
     private RailTransport head;

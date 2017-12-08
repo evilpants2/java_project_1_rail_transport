@@ -1,8 +1,12 @@
 package model.train.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class RailTransport {
+public abstract class RailTransport
+        implements java.io.Serializable {
+    private static final long serialVersionUID = -3056760678953206590L;
+
     private final int transportID;
     private final int weight;
     private final int wheelDiameter;
