@@ -1,4 +1,4 @@
-package main.java.model.entity.rail;
+package model.train;
 
 public interface RailConst {
 

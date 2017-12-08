@@ -1,8 +1,8 @@
-package main.java.model.entity.passenger;
+package model.train.entity;
 
 public class Item {
-    private String itemName;
-    private int weight;
+    private final String itemName;
+    private final int weight;
 
     public Item(String itemName, int weight) {
         this.itemName = itemName;

@@ -1,15 +1,17 @@
-package main.java.model.entity.passenger;
+package model.train.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Passenger {
+
     private final String name;
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items;
     private Ticket ticket;
 
     public Passenger(String name) {
         this.name = name;
+        this.items = new ArrayList<>();
     }
 
     public Item get(int index) {
@@ -22,6 +24,14 @@ public class Passenger {
 
     public Item remove(int index) {
         return items.remove(index);
+    }
+
+    public int getBaggageWeight() {
+        int weight = 0;
+        for (Item item : items) {
+            weight += item.getWeight();
+        }
+        return weight;
     }
 
     public String getName() {

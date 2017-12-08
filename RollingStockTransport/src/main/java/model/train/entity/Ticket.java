@@ -1,25 +1,29 @@
-package main.java.model.entity.passenger;
+package model.train.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Ticket {
     private final String from;
     private final String to;
-    private final LocalDate dateArrive;
-    private final LocalDate dateDeparture;
-    private final String train;
+    private final LocalDateTime dateArrive;
+    private final LocalDateTime dateDeparture;
     private final String waggon;
-    private final String place;
+    private final String train;
+    private final int trainID;
+    private final int waggonNumber;
+    private final int place;
 
-    public Ticket(String from, String to, LocalDate dateArrive,
-                  LocalDate dateDeparture, String train,
-                  String waggon, String place) {
+    private Ticket(String from, String to, LocalDateTime dateArrive,
+           LocalDateTime dateDeparture, String waggon, String train,
+                   int trainID, int waggonNumber, int place) {
         this.from = from;
         this.to = to;
         this.dateArrive = dateArrive;
         this.dateDeparture = dateDeparture;
         this.train = train;
         this.waggon = waggon;
+        this.trainID = trainID;
+        this.waggonNumber = waggonNumber;
         this.place = place;
     }
 
@@ -31,12 +35,16 @@ public class Ticket {
         return to;
     }
 
-    public LocalDate getDateArrive() {
+    public LocalDateTime getDateArrive() {
         return dateArrive;
     }
 
-    public LocalDate getDateDeparture() {
+    public LocalDateTime getDateDeparture() {
         return dateDeparture;
+    }
+
+    public int getTrainID() {
+        return trainID;
     }
 
     public String getTrain() {
@@ -47,18 +55,28 @@ public class Ticket {
         return waggon;
     }
 
-    public String getPlace() {
+    public int getWaggonNumber() {
+        return waggonNumber;
+    }
+
+    public int getPlace() {
         return place;
+    }
+
+    public static Builder newTicket() {
+        return new Builder();
     }
 
     public static class Builder {
         private String from;
         private String to;
-        private LocalDate dateArrive;
-        private LocalDate dateDeparture;
+        private LocalDateTime dateArrive;
+        private LocalDateTime dateDeparture;
         private String train;
         private String waggon;
-        private String place;
+        private int trainID;
+        private int waggonNumber;
+        private int place;
 
         public Builder from(String from) {
             this.from = from;
@@ -70,12 +88,12 @@ public class Ticket {
             return this;
         }
 
-        public Builder dateArrive(LocalDate date) {
+        public Builder dateArrive(LocalDateTime date) {
             this.dateArrive = date;
             return this;
         }
 
-        public Builder dateDeparture(LocalDate date) {
+        public Builder dateDeparture(LocalDateTime date) {
             this.dateDeparture = date;
             return this;
         }
@@ -85,12 +103,22 @@ public class Ticket {
             return this;
         }
 
+        public Builder trainID(int trainID) {
+            this.trainID = trainID;
+            return this;
+        }
+
         public Builder waggon(String waggon) {
             this.waggon = waggon;
             return this;
         }
 
-        public Builder place(String place) {
+        public Builder waggonNumber(int waggonNumber) {
+            this.waggonNumber = waggonNumber;
+            return this;
+        }
+
+        public Builder place(int place) {
             this.place = place;
             return this;
         }
@@ -98,11 +126,11 @@ public class Ticket {
         public Ticket build() {
             return new Ticket(
                     from, to, dateArrive,
-                    dateDeparture, train,
-                    waggon, place
+                    dateDeparture, waggon,
+                    train, trainID,
+                    waggonNumber, place
             );
         }
-
     }
 
     @Override
