@@ -75,9 +75,9 @@ public class ProjectData {
         Passenger p15 = new Passenger("john");
 
         p1.setTicket(getTicket(12,5));
-        p2.setTicket(getTicket(11,4)); //
-        p3.setTicket(getTicket(10,4)); //
-        p4.setTicket(getTicket(9,4)); //
+        p2.setTicket(getTicket(11,4));
+        p3.setTicket(getTicket(10,4));
+        p4.setTicket(getTicket(9,4));
         p5.setTicket(getTicket(5,3));
         p6.setTicket(getTicket(6,3));
         p7.setTicket(getTicket(7,2));

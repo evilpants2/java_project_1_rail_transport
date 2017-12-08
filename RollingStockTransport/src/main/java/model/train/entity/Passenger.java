@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Passenger {
+    private static int counter;
 
     private final String name;
+    private final int passengerID = ++counter;
     private List<Item> items;
     private Ticket ticket;
 
@@ -44,5 +46,32 @@ public class Passenger {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public int getPassengerID() {
+        return passengerID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj != null && obj.getClass() == getClass()) {
+            Passenger p = (Passenger) obj;
+            return p.passengerID == this.passengerID;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * passengerID;
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "name='" + name + '\'' +
+                ", passengerID=" + passengerID +
+                '}';
     }
 }

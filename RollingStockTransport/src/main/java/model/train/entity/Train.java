@@ -1,5 +1,6 @@
 package model.train.entity;
 
+import model.train.NotTractionException;
 import model.train.Traction;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public final class Train {
 
     public Train(RailTransport tr, List<RailTransport> waggons) {
         if(!isTraction(tr))
-            throw new RuntimeException("Need traction rail transport !");
+            throw new NotTractionException("Need traction rail transport !");
         this.head = tr;
         this.waggons = waggons;
     }
@@ -22,7 +23,7 @@ public final class Train {
     public Train(RailTransport head, RailTransport tail, List<RailTransport> waggons) {
         this(head, waggons);
         if (!isTraction(tail))
-            throw new RuntimeException("Need traction rail transport !");
+            throw new NotTractionException("Need traction rail transport !");
         this.tail = tail;
     }
 
@@ -75,6 +76,8 @@ public final class Train {
 
     @Override
     public String toString() {
-        return "Train: " + idTrain;
+        return "Train №: " + idTrain +
+                "\nTraction: " + head.toString() +
+                "\nNumber of waggons: " + waggons.size();
     }
 }

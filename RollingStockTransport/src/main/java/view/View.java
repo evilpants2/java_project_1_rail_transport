@@ -12,6 +12,10 @@ public class View {
         System.out.println(msg);
     }
 
+    public void printerr(String msg){
+        System.err.println(msg);
+    }
+
     public void printCollection(Collection<?> c) {
         for (Object o : c) {
             System.out.println(o);

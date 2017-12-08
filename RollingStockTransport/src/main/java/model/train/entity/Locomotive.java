@@ -38,9 +38,7 @@ public class Locomotive extends RailTransport
 
     @Override
     public String toString() {
-        return super.toString() + "\n Locomotive{" +
-                "\n speed=" + speed +
-                "\n engine=" + engine +
-                '}';
+        return "Locomotive" + getIdentifierName();
+
     }
 }

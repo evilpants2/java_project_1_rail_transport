@@ -24,6 +24,10 @@ public final class RailwayStation {
         return trains.get(index);
     }
 
+    public int numberOfTrains() {
+        return trains.size();
+    }
+
     public void takeTrain(Passenger passenger, int track) {
         if(passenger == null || track < 0 || track >= trains.size()) {
             throw new IllegalArgumentException();
