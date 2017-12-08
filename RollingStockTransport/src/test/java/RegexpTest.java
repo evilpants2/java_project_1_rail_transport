@@ -7,7 +7,8 @@ public class RegexpTest {
 
     @Test
     public void testInRange() {
-        assertEquals(true, "-show train 1".matches(CommandsRegexp.CMD_SHOW_TRAIN));
+        assertEquals(true, "-show train 1".matches(CommandsRegexp.SHOW_TRAIN_REGEX));
+        assertEquals(true, "-count in range (3,5)".matches(CommandsRegexp.COUNT_IN_RANGE_REGEX));
     }
 
 }

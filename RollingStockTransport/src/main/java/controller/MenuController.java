@@ -32,6 +32,7 @@ class MenuController {
     void execute() {
         while (true) {
             String input = scanner.nextLine();
+            input = input.trim();
             switch (input) {
                 case CMD_HELP:
                     showHelp();
