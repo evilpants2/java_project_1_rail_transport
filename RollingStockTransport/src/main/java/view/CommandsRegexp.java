@@ -1,6 +1,9 @@
 package view;
 
 public interface CommandsRegexp {
+    //language
+    String UA = "-ua";
+    String ENG = "-eng";
     //commands
     String CMD_SHOW = "-show";
     String CMD_SORT = "-sort";

@@ -33,8 +33,8 @@ class MenuController {
 
     void execute() {
         while (true) {
-            String input = scanner.nextLine();
-            switch (handler(input)) {
+            String input = scanner.nextLine().replaceAll("\\s+", " ").trim();
+            switch (input) {
                 case CMD_HELP:
                     showHelp();
                     break;
@@ -59,8 +59,10 @@ class MenuController {
                         showSelected(input);
                     } else if (input.matches(CommandsRegexp.COUNT_IN_RANGE_REGEX)) {
                         inRange(input);
+                    } else if (input.equals(" ") || input.isEmpty()) {
+                        break;
                     } else {
-                        view.printerr(rs().getString("incorrect"));
+                        view.println(rs().getString("incorrect"));
                     }
             }
         }
@@ -91,11 +93,6 @@ class MenuController {
             b.append(m.group()).append(",");
         }
         return b.substring(0, b.length() - 1);
-    }
-
-    private String handler(String input) {
-        return input.trim().replace("\\s+", " ");
-
     }
 
     private void inRange(String input) {

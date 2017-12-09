@@ -1,5 +1,7 @@
 package controller;
 
+import static view.CommandsRegexp.ENG;
+import static view.CommandsRegexp.UA;
 import static view.Multilingual.rs;
 
 import model.train.RailwayStation;
@@ -34,15 +36,19 @@ public class Controller {
     private void selectLanguage() {
         while (true) {
             String input = sc.nextLine();
+            input = input.trim().replaceAll("\\s+", " ");
             switch (input) {
-                case "-ua":
+                case UA:
                     multilingual.switchLanguage(Multilingual.Language.UA);
                     return;
-                case "-eng":
+                case ENG:
                     multilingual.switchLanguage(Multilingual.Language.ENG);
                     return;
                 default:
-                    view.printerr(rs().getString("incorrect"));
+                    if(input.equals(" ") || input.isEmpty()) {
+                        break;
+                    }
+                    view.println(rs().getString("incorrect"));
                     view.println(ViewText.SELECT_LANGUAGE);
             }
         }
