@@ -34,8 +34,7 @@ class MenuController {
     void execute() {
         while (true) {
             String input = scanner.nextLine();
-            input = input.trim();
-            switch (input) {
+            switch (handler(input)) {
                 case CMD_HELP:
                     showHelp();
                     break;
@@ -91,7 +90,12 @@ class MenuController {
         while (m.find()) {
             b.append(m.group()).append(",");
         }
-        return b.substring(0, b.length()-1);
+        return b.substring(0, b.length() - 1);
+    }
+
+    private String handler(String input) {
+        return input.trim().replace("\\s+", " ");
+
     }
 
     private void inRange(String input) {
