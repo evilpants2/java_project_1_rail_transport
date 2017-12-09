@@ -8,9 +8,8 @@ public interface CommandsRegexp {
     String CMD_HELP = "-help";
     String CMD_SELECTED = "-show selected";
     String CMD_QUIT = "-quit";
-    String CMD_SHOW_TRAIN = "-show train";
     //regexp
     String SHOW_TRAIN_REGEX = "-show train [0-9]{1,3}";
-    String COUNT_IN_RANGE_REGEX = "-count in range \\([0-9]{1,2},[0-9]{1,2}\\)";
+    String COUNT_IN_RANGE_REGEX = "-count in range \\([0-9]{1,2}[\\s]*,[\\s]*[0-9]{1,2}\\)";
     String SELECT_REGEX = "-select (\\d{1,3})";
 }

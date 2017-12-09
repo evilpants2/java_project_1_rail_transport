@@ -22,6 +22,14 @@ public class Locomotive extends RailTransport
         this.engine = engine;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
     @Override
     public String getIdentifierName() {
         return getName() + "-" + engine.toString();
@@ -41,6 +49,5 @@ public class Locomotive extends RailTransport
     @Override
     public String toString() {
         return "Locomotive" + getIdentifierName();
-
     }
 }

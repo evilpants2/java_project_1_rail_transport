@@ -44,6 +44,7 @@ public final class RailwayStation {
             RailTransport rt = pt.getWaggons().get(ticket.getWaggonNumber());
             PassengerWaggon pw = (PassengerWaggon) rt;
             pw.addPassenger(passenger);
-        } }
+        }
+    }
 
 }

@@ -14,6 +14,8 @@ import view.View;
 import view.ViewText;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class MenuController {
     private final RailwayStation railway;
@@ -65,8 +67,43 @@ class MenuController {
         }
     }
 
-    private void showHelp() {
-        view.println(rs().getString("commands"));
+    private void count() {
+        Train t;
+        if ((t = userData.getCurrentTrain()) != null) {
+            Tuple<Integer, Integer> result = Trains.count(t);
+            view.println(rs().getString("quantity_passengers") + result.getX());
+            view.println(rs().getString("quantity_baggages") + result.getY());
+        } else {
+            view.println(rs().getString("not_selected"));
+        }
+    }
+
+    private void checkIndex(int i) {
+        if(i < -1 || i >= railway.numberOfTrains()) {
+            throw new SuchTrainNotExist(rs().getString("incorrect_track"), i);
+        }
+    }
+
+    private String findNumber(String input) {
+        Pattern p = Pattern.compile("-?\\d+");
+        StringBuilder b = new StringBuilder();
+        Matcher m = p.matcher(input);
+        while (m.find()) {
+            b.append(m.group()).append(",");
+        }
+        return b.substring(0, b.length()-1);
+    }
+
+    private void inRange(String input) {
+        String args[] = findNumber(input).split(",");
+        Train t;
+        if ((t = userData.getCurrentTrain()) != null) {
+            int left = Integer.parseInt(args[0]);
+            int right = Integer.parseInt(args[1]);
+            view.printCollection(Trains.diapason(t, left, right));
+        } else {
+            view.println(rs().getString("not_selected"));
+        }
     }
 
     private void select(String i) {
@@ -81,24 +118,16 @@ class MenuController {
         view.println(rs().getString("selected"));
     }
 
-    private void count() {
-        Train t;
-        if ((t = userData.getCurrentTrain()) != null) {
-            Tuple<Integer, Integer> result = Trains.countPassengers(t);
-            view.println(rs().getString("quantity_passengers") + result.getX());
-            view.println(rs().getString("quantity_baggages") + result.getY());
-        } else {
-            view.println(rs().getString("not_selected"));
-        }
+    private void showHelp() {
+        view.println(rs().getString("commands"));
     }
 
-    private void sort() {
-        Train t;
-        if ((t = userData.getCurrentTrain()) != null) {
-            Trains.sort(t, PassengerWaggon.comfortComparator());
-            view.println(rs().getString("sort"));
-        } else {
-            view.println(rs().getString("not_selected"));
+
+    private void show() {
+        for (int i = 0; i < railway.numberOfTrains(); i++) {
+            view.println(rs().getString("track") + i + ": ");
+            view.println(railway.getTrain(i).toString());
+            view.println(ViewText.TRAIN_SEPARATOR);
         }
     }
 
@@ -125,30 +154,13 @@ class MenuController {
         view.println(railway.getTrain(index).toString());
     }
 
-    private void checkIndex(int i) {
-        if(i < -1 || i >= railway.numberOfTrains()) {
-            throw new SuchTrainNotExist(rs().getString("incorrect_track"), i);
-        }
-    }
-
-    private void inRange(String cmd) {
-        cmd = cmd.substring(16, cmd.length()-1);
-        String args[] = cmd.split(",");
+    private void sort() {
         Train t;
         if ((t = userData.getCurrentTrain()) != null) {
-            int left = Integer.parseInt(args[0]);
-            int right = Integer.parseInt(args[1]);
-            view.printCollection(Trains.diapason(t, left, right));
+            Trains.sort(t, PassengerWaggon.comfortComparator());
+            view.println(rs().getString("sort"));
         } else {
             view.println(rs().getString("not_selected"));
-        }
-    }
-
-    private void show() {
-        for (int i = 0; i < railway.numberOfTrains(); i++) {
-            view.println(rs().getString("track") + i + ": ");
-            view.println(railway.getTrain(i).toString());
-            view.println(ViewText.TRAIN_SEPARATOR);
         }
     }
 }

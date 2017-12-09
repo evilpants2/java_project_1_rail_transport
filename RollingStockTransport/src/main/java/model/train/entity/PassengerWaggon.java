@@ -25,6 +25,14 @@ public class PassengerWaggon extends RailTransport
         this.comfort = comfort;
     }
 
+    public int getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public ComfortLevel getComfort() {
+        return comfort;
+    }
+
     public int getCountPassengers() {
         return passengers.size();
     }

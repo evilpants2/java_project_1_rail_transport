@@ -16,7 +16,7 @@ public final class Trains {
     }
 
     //counts passenger & baggage
-    public static Tuple<Integer, Integer> countPassengers(Train train) {
+    public static Tuple<Integer, Integer> count(Train train) {
         Integer numberOfPassengers = 0;
         Integer weight = 0;
         PassengerWaggon pw;
