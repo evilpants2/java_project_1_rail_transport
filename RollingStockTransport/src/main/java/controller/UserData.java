@@ -1,13 +1,13 @@
 package controller;
 
-import model.train.entity.Train;
+import model.entity.Train;
 
-public class UserData {
+class UserData {
     private static UserData instances;
 
     private UserData() {}
 
-    public static UserData getInstances() {
+    static UserData getInstances() {
         if(instances == null) {
             synchronized (UserData.class) {
                 if(instances == null){
@@ -20,11 +20,11 @@ public class UserData {
 
     private Train current;
 
-    public void setCurrentTrain(Train train) {
+    void setCurrentTrain(Train train) {
         this.current = train;
     }
 
-    public Train getCurrentTrain() {
+    Train getCurrentTrain() {
         return current;
     }
 }

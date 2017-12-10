@@ -1,4 +1,4 @@
-package model.train;
+package model;
 
 public enum ComfortLevel {
     ECONOMY, COUPE, LUXE, VIP;

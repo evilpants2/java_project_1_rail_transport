@@ -1,9 +1,9 @@
-package model.train;
+package model;
 
-import model.train.entity.Passenger;
-import model.train.entity.PassengerWaggon;
-import model.train.entity.RailTransport;
-import model.train.entity.Train;
+import model.entity.Passenger;
+import model.entity.PassengerWaggon;
+import model.entity.RailTransport;
+import model.entity.Train;
 
 import java.util.ArrayList;
 import java.util.Comparator;

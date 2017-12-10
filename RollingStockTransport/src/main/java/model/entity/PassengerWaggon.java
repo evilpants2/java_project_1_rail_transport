@@ -1,9 +1,8 @@
-package model.train.entity;
+package model.entity;
 
-import model.train.ComfortLevel;
-import model.train.RailConst;
+import model.ComfortLevel;
+import model.RailConst;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,14 +14,35 @@ public class PassengerWaggon extends RailTransport
     private ComfortLevel comfort;
     private List<Passenger> passengers;
 
-    public PassengerWaggon(int id, int weight, int wheelDiameter, String name,
-                           LocalDate manufactureDate, String color,
-                           int numberOfSeats, ComfortLevel comfort) {
-        super(id, weight, wheelDiameter,
-                name, manufactureDate, color);
+    private PassengerWaggon() {
         passengers = new ArrayList<>();
-        this.numberOfSeats = numberOfSeats;
-        this.comfort = comfort;
+    }
+
+    public static BuilderSub newPassengerWaggon() {
+        return new PassengerWaggon().new BuilderSub();
+    }
+
+    public class BuilderSub extends RailTransport.BuilderBase<BuilderSub> {
+
+        public BuilderSub numberOfSeats(int numberOfSeats) {
+            PassengerWaggon.this.numberOfSeats = numberOfSeats;
+            return this;
+        }
+
+        public BuilderSub comfort(ComfortLevel comfort) {
+            PassengerWaggon.this.comfort = comfort;
+            return this;
+        }
+
+        @Override
+        BuilderSub This() {
+            return this;
+        }
+
+        @Override
+        public PassengerWaggon build() {
+            return PassengerWaggon.this;
+        }
     }
 
     public int getNumberOfSeats() {
@@ -57,7 +77,7 @@ public class PassengerWaggon extends RailTransport
 
     @Override
     public String getIdentifierName() {
-        return getName() + "-" + comfort.toString();
+        return getIndexNumber() + "/" + getName() + "-" + comfort.toString();
     }
 
     @Override

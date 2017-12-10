@@ -1,11 +1,11 @@
-package model.train.entity;
+package model.entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Ticket implements java.io.Serializable {
     private static final long serialVersionUID = -3056760678953206590L;
 
+    private final int ticketID;
     private final String from;
     private final String to;
     private final LocalDateTime dateArrive;
@@ -16,9 +16,11 @@ public class Ticket implements java.io.Serializable {
     private final int waggonNumber;
     private final int place;
 
-    private Ticket(String from, String to, LocalDateTime dateArrive,
-           LocalDateTime dateDeparture, String waggon, String train,
-                   int trainID, int waggonNumber, int place) {
+    private Ticket(int ticketID, String from, String to,
+                   LocalDateTime dateArrive, LocalDateTime dateDeparture,
+                   String waggon, String train, int trainID,
+                   int waggonNumber, int place) {
+        this.ticketID = ticketID;
         this.from = from;
         this.to = to;
         this.dateArrive = dateArrive;
@@ -71,6 +73,7 @@ public class Ticket implements java.io.Serializable {
     }
 
     public static class Builder {
+        private int ticketID;
         private String from;
         private String to;
         private LocalDateTime dateArrive;
@@ -80,6 +83,11 @@ public class Ticket implements java.io.Serializable {
         private int trainID;
         private int waggonNumber;
         private int place;
+
+        public Builder ticketID(int ticketID) {
+            this.ticketID = ticketID;
+            return this;
+        }
 
         public Builder from(String from) {
             this.from = from;
@@ -127,7 +135,7 @@ public class Ticket implements java.io.Serializable {
         }
 
         public Ticket build() {
-            return new Ticket(
+            return new Ticket(ticketID,
                     from, to, dateArrive,
                     dateDeparture, waggon,
                     train, trainID,

@@ -1,4 +1,4 @@
-package model.train;
+package model;
 
 public class Tuple <X, Y> {
     private final X x;

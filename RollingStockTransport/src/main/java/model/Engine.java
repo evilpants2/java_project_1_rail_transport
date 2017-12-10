@@ -1,4 +1,4 @@
-package model.train;
+package model;
 
 public enum Engine {
     TURBOSHAFT(3600), DIESEL(4200), PETROL(4500), ELECTRIC_MOTOR(4300);

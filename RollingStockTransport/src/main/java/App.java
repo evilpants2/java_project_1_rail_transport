@@ -1,5 +1,5 @@
 import controller.Controller;
-import model.train.RailwayStation;
+import model.RailwayStation;
 import view.View;
 
 public class App {

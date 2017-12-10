@@ -1,6 +1,6 @@
-package model.train;
+package model;
 
-import model.train.entity.*;
+import model.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +41,12 @@ public final class RailwayStation {
         Ticket ticket = passenger.getTicket();
         if (ticket != null && ticket.getTrainID() == pt.getIdTrain()) {
             // success
-            RailTransport rt = pt.getWaggons().get(ticket.getWaggonNumber());
-            PassengerWaggon pw = (PassengerWaggon) rt;
-            pw.addPassenger(passenger);
+            for (RailTransport rt : pt.getWaggons()) {
+                if (rt.getIndexNumber() == ticket.getWaggonNumber()) {
+                    PassengerWaggon pw = (PassengerWaggon) rt;
+                    pw.addPassenger(passenger);
+                }
+            }
         }
     }
 

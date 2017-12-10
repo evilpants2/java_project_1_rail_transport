@@ -1,16 +1,15 @@
-package model.train.entity;
+package model.entity;
 
-import model.train.NotTractionException;
-import model.train.Traction;
+import model.NotTractionException;
+import model.Traction;
 
-import java.io.Serializable;
 import java.util.List;
 
 public final class Train implements java.io.Serializable {
     private static final long serialVersionUID = -3056760678953206590L;
 
     private transient static int quantity;
-    private final int idTrain = quantity++;
+    private final int idTrain = ++quantity;
 
     private RailTransport head;
     private RailTransport tail;

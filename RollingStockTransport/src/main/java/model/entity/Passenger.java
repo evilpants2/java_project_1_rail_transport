@@ -1,22 +1,26 @@
-package model.train.entity;
+package model.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Passenger implements java.io.Serializable {
     private static final long serialVersionUID = -3056760678953206590L;
 
-    private transient static int counter;
+    //private transient static int counter;
 
+    private final int passengerID;
     private final String name;
-    private final int passengerID = ++counter;
     private List<Item> items;
     private Ticket ticket;
 
-    public Passenger(String name) {
+    public Passenger(String name, int passengerID) {
         this.name = name;
+        this.passengerID = passengerID;
         this.items = new ArrayList<>();
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public Item get(int index) {

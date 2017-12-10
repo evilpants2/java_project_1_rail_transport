@@ -1,4 +1,4 @@
-package model.train;
+package model;
 
 public class NotTractionException extends RuntimeException {
     public NotTractionException() { }

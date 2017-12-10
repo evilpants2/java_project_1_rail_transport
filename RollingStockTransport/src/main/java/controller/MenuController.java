@@ -3,12 +3,12 @@ package controller;
 import static view.CommandsRegexp.*;
 import static view.Multilingual.rs;
 
-import model.train.RailwayStation;
-import model.train.SuchTrainNotExist;
-import model.train.Trains;
-import model.train.Tuple;
-import model.train.entity.PassengerWaggon;
-import model.train.entity.Train;
+import model.RailwayStation;
+import model.SuchTrainNotExist;
+import model.Trains;
+import model.Tuple;
+import model.entity.PassengerWaggon;
+import model.entity.Train;
 import view.CommandsRegexp;
 import view.View;
 import view.ViewText;
@@ -137,7 +137,7 @@ class MenuController {
         if ((t = userData.getCurrentTrain()) != null) {
             view.println(t.toString());
             for (int i = 0; i < t.getWaggons().size(); i++) {
-                view.println("№" + i + t.getWaggons().get(i));
+                view.println( t.getWaggons().get(i).toString());
             }
         } else {
             view.println(rs().getString("not_selected"));

@@ -4,7 +4,7 @@ import java.io.*;
 
 class DataController {
 
-    void save(ProjectData o, String filename) {
+    void save(Object o, String filename) {
         try (FileOutputStream fileOut = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(o);
@@ -14,10 +14,10 @@ class DataController {
         }
     }
 
-    ProjectData load(String filename) {
+    Object load(String filename) {
         try (FileInputStream fileIn = new FileInputStream(filename);
              ObjectInputStream in = new ObjectInputStream(fileIn)){
-            return (ProjectData) in.readObject();
+            return (Object) in.readObject();
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
             return null;

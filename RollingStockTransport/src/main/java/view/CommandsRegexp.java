@@ -13,6 +13,6 @@ public interface CommandsRegexp {
     String CMD_QUIT = "-quit";
     //regexp
     String SHOW_TRAIN_REGEX = "-show train [0-9]{1,3}";
-    String COUNT_IN_RANGE_REGEX = "-count in range \\([0-9]{1,2}[\\s]*,[\\s]*[0-9]{1,2}\\)";
+    String COUNT_IN_RANGE_REGEX = "-count in range[\\s]*\\([0-9]{1,2}[\\s]*,[\\s]*[0-9]{1,2}\\)";
     String SELECT_REGEX = "-select (\\d{1,3})";
 }

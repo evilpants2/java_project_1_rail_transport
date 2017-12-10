@@ -4,7 +4,7 @@ import static view.CommandsRegexp.ENG;
 import static view.CommandsRegexp.UA;
 import static view.Multilingual.rs;
 
-import model.train.RailwayStation;
+import model.RailwayStation;
 import view.Multilingual;
 import view.View;
 import view.ViewText;
@@ -24,7 +24,7 @@ public class Controller {
     }
 
     public void userProcess() {
-        ProjectData.init(railway);
+        Database.init(railway);
         sc = new Scanner(System.in);
         final MenuController menu = new MenuController(railway, view, sc);
         view.println(ViewText.SELECT_LANGUAGE);
